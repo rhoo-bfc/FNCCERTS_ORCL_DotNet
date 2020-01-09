@@ -2,6 +2,69 @@
 @{
     ViewData["Title"] = "NonOpito";
 }
+<div class="container-fluid">
+    <h2>Non-Opito</h2>
+    <table id="NoneOpito" class="table table-striped table-bordered dt-responsive nowrap" width=100% cellspacing="0">
+        <thead>
+            <tr>
+                <th>Person Code</th>
+                <th>First Name</th>
+                <th>Surname</th>
+                <th>UI Code</th>
+                <th>Calocc Code</th>
+                <th>Cert 1</th>
+                <th>Cert 2</th>
+                <th>Cert 3</th>
+                <th>Certificate Expiry Date</th>
+                <th>New Cert Start Date</th>
+                <th>Refresh Cert End Date</th>
+            </tr>
+        </thead>
 
-<h2>NonOpito</h2>
+    </table>
+</div>
+<script>
+        $(document).ready(function ()
+        {
+            $("#NonOpito").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Forms/NonOpito",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columnDefs":
+                [{
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }],
+                "columns": [
+                    { "data": "person_code", "name": "person_code", "autoWidth": true },
+                    { "data": "forename", "name": "forename", "autoWidth": true },
+                    { "data": "surname", "name": "surname", "autoWidth": true },
+                    { "data": "ui_code", "name": "ui_code", "autoWidth": true },
+                    { "data": "cert_1", "name": "cert_1", "autoWidth": true },
+                    { "data": "cert_2", "name": "cert_2", "autoWidth": true },
+                    { "data": "cert_3", "name": "cert_3", "autoWidth": true },
+                    { "data": "certificate_expiry_date", "name": "certificate_expiry_date", "autoWidth": true },
+                    { "data": "new_cert_start_date", "name": "new_cert_start_date", "autoWidth": true },
+                    { "data": "refresh_cert_end_date", "name": "refresh_cert_end_date", "autoWidth": true },
+                    {
+                        "render": function (data, type, full, meta)
+                        { return '<a class="btn btn-info" href="/DemoGrid/Edit/' + full.CustomerID + '">Edit</a>'; }
+                    },
+                    {
+                        data: null, render: function (data, type, row)
+                        {
+                            return "<a href='#' class='btn btn-danger' onclick=DeleteData('" + row.CustomerID + "'); >Delete</a>" ;
+                        }
+                    },
+                ]
+            });
+        });
 
+</script>

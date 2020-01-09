@@ -44,11 +44,15 @@
                 }],
                 "columns": [
                     { "data": "person_code", "name": "person_code", "autoWidth": true },
+                    { "data": "forename", "name": "forename", "autoWidth": true },
+                    { "data": "surname", "name": "surname", "autoWidth": true },
                     { "data": "ui_code", "name": "ui_code", "autoWidth": true },
-                    { "data": "Address", "name": "Address", "autoWidth": true },
-                    { "data": "Country", "name": "Country", "autoWidth": true },
-                    { "data": "City", "name": "City", "autoWidth": true },
-                    { "data": "Phoneno", "name": "Phoneno", "autoWidth": true },
+                    { "data": "cert_1", "name": "cert_1", "autoWidth": true },
+                    { "data": "cert_2", "name": "cert_2", "autoWidth": true },
+                    { "data": "cert_3", "name": "cert_3", "autoWidth": true },
+                    { "data": "certificate_expiry_date", "name": "certificate_expiry_date", "autoWidth": true },
+                    { "data": "new_cert_start_date", "name": "new_cert_start_date", "autoWidth": true },
+                    { "data": "refresh_cert_end_date", "name": "refresh_cert_end_date", "autoWidth": true },
                     {
                         "render": function (data, type, full, meta)
                         { return '<a class="btn btn-info" href="/DemoGrid/Edit/' + full.CustomerID + '">Edit</a>'; }
