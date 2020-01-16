@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 using Microsoft.Extensions.Configuration;
+using FNCORCL2.Oracle;
 //using FNCORCL2.Data;
 
 namespace FNCORCL2
@@ -27,7 +28,7 @@ namespace FNCORCL2
         public void ConfigureServices(IServiceCollection services)
         {
             //var con_string = Configuration.GetConnectionString("DefaultConnection");
-            //services.AddDbContext<ApplicationDbContext>(options => options.UseOracle(con_string));
+            //services.AddDbContext<OracleDataContext>(options => options.UseOracle());
 
             services.AddMvc();
         }
@@ -55,7 +56,7 @@ namespace FNCORCL2
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Forms}/{action=OpitoGWO}/{id?}");
+                    template: "{controller=forms}/{action=opitogwo}/{id?}");
             });
 
      

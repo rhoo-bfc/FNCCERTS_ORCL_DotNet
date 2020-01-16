@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 
+
 namespace FNCORCL2.Controllers
 {
     public class FormsController : Controller
@@ -18,21 +19,27 @@ namespace FNCORCL2.Controllers
         //{
         //    _orcl = orcl;
         //}
-  
+        private readonly OracleDataContext _db;
+
+        public FormsController(OracleDataContext oracleContext)
+        {
+            _db = oracleContext;
+        }
+
         //------------------------------------------- OPITO & GWO table ------------------------------------------
         public IActionResult OpitoGWO(string personCode, string unitInstanceCode, string ucaloccCode, string certificateExpiryDate,
             string newCertStartDate, string refreshCertEndDate, string surname, string forename, string createdBy, 
             string createdDate, string updatedBy, string updatedDate)
         {
-            string conString = "User Id=sys;Password=Burnleyfc_12;Data Source=localhost:1521/FNC";
-
-            using (OracleConnection cn = new OracleConnection(conString))
+            //string conString = "User Id=sys;Password=Burnleyfc_12;Data Source=localhost:1521/FNC";
+            
+            using (OracleConnection cn = new OracleConnection( ))
             {
                 OracleDataAdapter da = new OracleDataAdapter();
                 OracleCommand cmd = new OracleCommand();
                 cmd.Connection = cn;
                 cmd.InitialLONGFetchSize = 1000;
-                cmd.CommandText = conString + "populate_opito_certificates";// Call Oracle stored procedure
+                cmd.CommandText = _db + "populate_opito_certificates";// Call Oracle stored procedure
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("PERSON_CODE", OracleDbType.Int32).Value = personCode;
                 cmd.Parameters.Add("UI_CODE", OracleDbType.Char).Value = unitInstanceCode;
@@ -49,7 +56,7 @@ namespace FNCORCL2.Controllers
                 da.SelectCommand = cmd;
                // DataTable dt = new DataTable();
                 //da.Fill(dt);
-                return Json(cmd.Parameters);
+                return Json(cmd);
             }
         }
 
